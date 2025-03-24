@@ -4,12 +4,15 @@
  */
 package mx.itson.yegua.ui;
 
+import mx.itson.yegua.entidades.Venta;
+
 /**
  *
  * @author icesp
  */
 public class Main {
     public static void main(String[] args) {
-        
+        Venta v = new Venta();
+        v.calcularTotal();
     }
 }

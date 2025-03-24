@@ -6,6 +6,7 @@ package mx.itson.yegua.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import mx.itson.yegua.entidades.Articulo;
 import mx.itson.yegua.enums.Categoria;
 import mx.itson.yegua.enums.TipoVenta;
 
@@ -106,27 +107,37 @@ public class Venta {
     private double total;
     private List<Articulo> articulo;
     
+    /**
+     * Calcula el subtotal en base a la categoria y el tipo de venta.
+     */
     public void calcularSubtotal(){
         double interes = 0.30;
         double subtotal = 0;
-        double total = 0;
-        //if this.tipo == tipoVenta.CREDITO {
-        //}
+        double interesTotal = 0;
+        double precioTotal = 0;
+        
         for (Articulo a : articulo) {
-            double precio = a.getPrecio();
-            total += a.getPrecio();
-            if (tipo == TipoVenta.CREDITO){
-                a.setPrecio(precio*interes);
+            if (a.getCategoria() != Categoria.ALIMENTOS && tipo == TipoVenta.CREDITO) {
+                interesTotal = a.getPrecio() * interes;
+                precioTotal = a.getPrecio() + interesTotal;
+            } else {
+                precioTotal += a.getPrecio();
             }
-        subtotal = total;    
+            subtotal = subtotal + precioTotal;
         }
+        subtotal = total;
     }
     
+    /**
+     * Calcula el total en base al subtotal.
+     */
     public void calcularTotal(){
-        for (Articulo a : articulo) {
-            
-        }
+        double descuentoSubtotal = 0;
+        double descuento = 0.3;
         
-        }
-    
+        if (total > 5000) {
+                descuentoSubtotal = subtotal * descuento;
+                subtotal = subtotal - descuentoSubtotal;
+            }
+        } 
 }
