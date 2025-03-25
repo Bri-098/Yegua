@@ -136,8 +136,8 @@ public class Venta {
         double descuento = 0.3;
         
         if (total > 5000) {
-                descuentoSubtotal = subtotal * descuento;
-                subtotal = subtotal - descuentoSubtotal;
+                descuentoSubtotal = total * descuento;
+                total = total - descuentoSubtotal;
             }
         } 
 }
